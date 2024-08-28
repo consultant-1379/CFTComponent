@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ericsson.nms.mediation.component</groupId>
+		<artifactId>CFTComponent</artifactId>
+		<version>2.4.20-SNAPSHOT</version>
+	</parent>
+	<artifactId>cft-component-core</artifactId>
+	<name>CFTP Component core classes</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ericsson.nms.mediation</groupId>
+			<artifactId>core-mediation-models-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ericsson.nms.mediation.models</groupId>
+			<artifactId>pm-mediation-model</artifactId>			
+		</dependency>
+
+		<dependency>
+			<groupId>com.ericsson.nms.mediation</groupId>
+			<artifactId>camel-engine-jca-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.sshd</groupId>
+			<artifactId>sshd-core</artifactId>
+			<version>${version.apache.sshd}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ftpserver</groupId>
+			<artifactId>ftpserver-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${version.mockito}</version>
+			<scope>test</scope>
+			<type>jar</type>
+		</dependency>
+
+		<!-- logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- testing -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ericsson.nms.mediation.component</groupId>
+			<artifactId>oss-common-plugin</artifactId>
+		</dependency>
+	</dependencies>
+</project>

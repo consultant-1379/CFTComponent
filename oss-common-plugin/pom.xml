@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ericsson.nms.mediation.component</groupId>
+		<artifactId>CFTComponent</artifactId>
+		<version>2.4.20-SNAPSHOT</version>
+	</parent>
+	<artifactId>oss-common-plugin</artifactId>
+	<name>oss common plugin jar</name>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>com.ericsson.oss.ftpmanager.common.constants/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.common.filetransfer.exceptions/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.common.logging/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.common.utilities/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.external.filetransferhandler.plugin.iface/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.external.filetransferhandler.plugin.iface.ftpsessionops/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.filetransferhandler.filetransfer.filetransferdetails/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<configuration>
+					<instrumentation>
+						<excludes>
+						<exclude>com.ericsson.oss.ftpmanager.common.constants/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.common.filetransfer.exceptions/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.common.logging/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.common.utilities/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.external.filetransferhandler.plugin.iface/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.external.filetransferhandler.plugin.iface.ftpsessionops/**</exclude>
+						<exclude>com.ericsson.oss.ftpmanager.filetransferhandler.filetransfer.filetransferdetails/**</exclude>
+						</excludes>
+					</instrumentation>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

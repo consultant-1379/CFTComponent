@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ericsson.nms</groupId>
+		<artifactId>integration</artifactId>
+		<version>15.2.0.30</version>
+	</parent>
+	<groupId>com.ericsson.nms.mediation.component</groupId>
+	<artifactId>CFTComponent</artifactId>
+	<packaging>pom</packaging>
+	<version>2.4.20-SNAPSHOT</version>
+
+	<name>CFTComponent</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- mocking frameworks version -->
+		<version.mockito>1.9.0</version.mockito>
+		<version.commons.net>3.2</version.commons.net>
+		<!-- apache sshd version -->
+		<version.apache.sshd>0.7.0</version.apache.sshd>
+		<!-- jsch version -->
+		<!-- Ftp server for testing -->
+		<version.ftp.server>1.0.6</version.ftp.server>
+		<!-- mediation-sdk version -->
+		<version.mediation.sdk>1.9.2.17</version.mediation.sdk>
+		<!-- version for pm mediation models -->
+		<version.pm.mediation.model>2.9.217</version.pm.mediation.model>
+		<!-- common engine services -->
+		<version.camel-engine-jca-common>1.5.29</version.camel-engine-jca-common>
+
+	</properties>
+	<profiles>
+		<profile>
+			<id>update_versions</id>
+			<activation>
+				<property>
+					<name>updateVersions</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>versions-maven-plugin</artifactId>
+						<version>2.0</version>
+						<executions>
+							<execution>
+								<id>use-latest-releases</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>use-latest-releases</goal>
+								</goals>
+							</execution>
+							<execution>
+								<phase>validate</phase>
+								<id>update-properties</id>
+								<goals>
+									<goal>update-properties</goal>
+								</goals>
+								<inherited>false</inherited>
+							</execution>
+						</executions>
+						<configuration>
+							<allowMajorUpdates>true</allowMajorUpdates>
+							<allowMinorUpdates>true</allowMinorUpdates>
+							<allowIncrementalUpdates>true</allowIncrementalUpdates>
+							<generateBackupPoms>false</generateBackupPoms>
+							<excludesList>*:*</excludesList>
+							<includes>
+								<include>com.ericsson.nms.mediation:mediation-sdk-bom:pom</include>
+								<include>com.ericsson.nms.mediation.models:pm-mediation-model:jar</include>
+								<include>com.ericsson.nms.mediation:camel-engine-jca-common:jar</include>
+							</includes>
+							<includeProperties>version.camel-engine-jca-common,version.pm.mediation.model,version.mediation.sdk</includeProperties>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											version.mediation.sdk maven-dependency-plugin
+										</artifactId>
+										<versionRange>
+											[2.4,)
+										</versionRange>
+										<goals>
+											<goal>analyze-dep-mgt</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.ericsson.maven.plugins
+										</groupId>
+										<artifactId>
+											rstate-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.0,)
+										</versionRange>
+										<goals>
+											<goal>rstate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											build-helper-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.7,)
+										</versionRange>
+										<goals>
+											<goal>regex-property</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											versions-maven-plugin
+										</artifactId>
+										<versionRange>
+											[2.0,)
+										</versionRange>
+										<goals>
+											<goal>
+												update-properties
+											</goal>
+											<goal>
+												use-latest-releases
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-enforcer-plugin
+										</artifactId>
+										<versionRange>
+											[1.1.1,)
+										</versionRange>
+										<goals>
+											<goal>enforce</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.ericsson.nms.mediation</groupId>
+				<artifactId>mediation-sdk-bom</artifactId>
+				<version>${version.mediation.sdk}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.ericsson.nms.mediation.models</groupId>
+				<artifactId>pm-mediation-model</artifactId>
+				<version>${version.pm.mediation.model}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ericsson.nms.mediation</groupId>
+				<artifactId>camel-engine-jca-common</artifactId>
+				<version>${version.camel-engine-jca-common}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ftpserver</groupId>
+				<artifactId>ftpserver-core</artifactId>
+				<version>${version.ftp.server}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.ericsson.nms.mediation.component</groupId>
+				<artifactId>oss-common-plugin</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.ericsson.nms.mediation.component</groupId>
+				<artifactId>cft-component-core</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<modules>
+		<module>cft-component-core</module>
+		<module>oss-common-plugin</module>
+	</modules>
+</project>
